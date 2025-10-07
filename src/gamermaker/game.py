@@ -1,3 +1,4 @@
+from src.gamermaker.keys import *
 from dataclasses import dataclass
 import pygame
 from typing import Callable, Tuple
@@ -26,6 +27,34 @@ class TempConfig:
     on_update: Callable = None
     on_draw: Callable = None
     fps: int = 60
+
+# Gameloop Function
+
+def _gameloop(on_update: Callable, on_draw: Callable, fps: int):
+    global running
+    clock = pygame.time.Clock()
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            # Runs keybinds from the add_keybinding() function
+            elif event.type == pygame.KEYDOWN and event.key in keybinds:
+                keybinds[event.key]()
+
+        # User-provided update logic
+        if on_update:
+            on_update()
+
+        # Drawing logic
+        if on_draw:
+            on_draw(screen)
+
+        pygame.display.flip()
+        clock.tick(fps)
+
+    pygame.quit()
+
 
 # Creates the Game
 def create(size: tuple[float, float], name: str = "Game Window", icon: pygame.Surface = None, on_update: callable = None,
@@ -78,43 +107,7 @@ def create(size: tuple[float, float], name: str = "Game Window", icon: pygame.Su
     TempConfig.fps = fps
 
     # Run the Gameloop
-    clock = pygame.time.Clock()
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            # Runs keybinds from the add_keybinding() function
-            elif event.type == pygame.KEYDOWN and event.key in keybinds:
-                keybinds[event.key]()
-
-        # User-provided update logic
-        if on_update:
-            on_update()
-
-        # Drawing logic
-        if on_draw:
-            on_draw(screen)
-
-        pygame.display.flip()
-        clock.tick(fps)
-
-    pygame.quit()
-
-# Adds Keybinds
-def add_keybinding(key: int, action: callable):
-    """
-    Adds or updates a keybinding.
-
-    Args:
-        key: The Pygame key constant, like pygame.K_SPACE.
-        action: The function to be called when the key is pressed.
-    """
-    keybinds[key] = action
-
-# Removes Keybinds
-def remove_keybinding(key: int):
-    del keybinds[key]
+    _gameloop(on_update, on_draw, fps)
 
 # Closes then reopens the window
 def reopen_window():
@@ -168,28 +161,8 @@ def reopen_window():
         if icon is not None:
             pygame.display.set_icon(icon)
 
-        clock = pygame.time.Clock()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    running = False
-                # Runs keybinds from the add_keybinding() function
-                elif event.type == pygame.KEYDOWN and event.key in keybinds:
-                    keybinds[event.key]()
-
-            # User-provided update logic
-            if on_update:
-                on_update()
-
-            # Drawing logic
-            if on_draw:
-                on_draw(screen)
-
-            pygame.display.flip()
-            clock.tick(fps)
-
-        pygame.quit()
+        # Run the gameloop
+        _gameloop(on_update, on_draw, fps)
 
 # Returns the dataclass of the current window
 def get_current_config():
@@ -256,40 +229,21 @@ def create_from_config(dataclass):
     dataclass.on_draw = on_draw
     dataclass.fps = fps
 
-    # Main loop
-    clock = pygame.time.Clock()
-    running = True
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-            # Runs keybinds from the add_keybinding() function
-            elif event.type == pygame.KEYDOWN and event.key in keybinds:
-                keybinds[event.key]()
-
-        # Call user-provided hooks
-        if on_update:
-            on_update()
-        if on_draw:
-            on_draw(screen)
-
-        pygame.display.flip()
-        clock.tick(fps)
-
-    pygame.quit()
+    # Run the gameloop
+    _gameloop(on_update, on_draw, fps)
 
 # Edits the current window's title
-def edit_window_name(name: str):
+def change_name(name: str):
     pygame.display.set_caption(name)
     TempConfig.name = name
 
 # Edits the current window's icon
-def edit_window_icon(icon: pygame.Surface):
+def change_icon(icon: pygame.Surface):
     pygame.display.set_icon(icon)
     TempConfig.icon = icon
 
 # Closes the current window so that a new one can be made
-def close_window():
+def end():
     global running
     running = False
     pygame.quit()

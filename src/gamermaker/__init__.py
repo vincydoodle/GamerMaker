@@ -1,4 +1,4 @@
-from gamermaker.gamermaker import *
+from src.gamermaker import *
 from pygame import *
 from pygame import quit as quit_pygame
 

@@ -13,7 +13,7 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 
 [PyPI Test](https://test.pypi.org/project/gamermaker/)
 
-# How to use
+# How to use GamerMaker
 ### Making a Window
 
 In order to make a game in Pygame, you would probably have a setup like this:
@@ -32,7 +32,7 @@ while running:
 
 However, in GamerMaker it compacts it for you:
 ```python
-import gamermaker
+import gamermaker as gm
 
 def update():
     # Update Code
@@ -40,7 +40,7 @@ def update():
 def draw():
     # Draw Code
 
-gamermaker.create((800, 600), "Game Window", gamermaker.image.load("PATH/TO/ICON.png"), on_update = update, on_draw = draw)
+gm.game.create((800, 600), "Game Window", gm.image.load("PATH/TO/ICON.png"), on_update = update, on_draw = draw)
 ```
 
 ### Keybinds
@@ -48,31 +48,31 @@ In Pygame, if you want to add a keybind you add it directly to the gameloop. In 
 1. Add your own code to your update function: 
 ```python
 def update():
-    for event in gamermaker.event.get():
-        if event.type == gamermaker.KEYDOWN:
-            if event.key == gamermaker.K_SPACE:
+    for event in gm.event.get():
+        if event.type == gm.KEYDOWN:
+            if event.key == gm.K_SPACE:
                 print("Space Was Pressed")
 ```
 
 2. Use GamerMaker's built in function:
 ```python
-gamermaker.add_keybinding(gamermaker.K_SPACE, lambda: print("Space Was Pressed"))
+gm.keys.add_keybinding(gm.K_SPACE, lambda: print("Space Was Pressed"))
 
 # You can also remove them
-gamermaker.remove_keybinding(gamermaker.K_SPACE)
+gm.keys.remove_keybinding(gm.K_SPACE)
 ```
 
 ### Window Handling
 
 In GamerMaker, there are various window handling functions:
 ```python
-gamermaker.reopen_window() # Closes and then reopens the window
+gm.game.reopen_window() # Closes and then reopens the window
 
-gamermaker.close_window() # Closes the window
+gm.game.end() # Closes the window
 
-gamermaker.edit_window_name("Hello, World") # Changes the current window title to the given one
+gm.edit_name("Hello, World") # Changes the current window title to the given one
 
-gamermaker.edit_window_icon(gamermaker.image.load("PATH/TO/NEW/ICON.png")) # Changes the current window icon to the given one
+gm.edit_icon(gm.image.load("PATH/TO/NEW/ICON.png")) # Changes the current window icon to the given one
 ```
 
 ### Window Dataclasses
@@ -99,9 +99,9 @@ class WindowConfig:
 ```
 In GamerMaker, there is a function for getting and manually changing the dataclass:
 ```python
-Dataclass = gamermaker.get_current_config() # Gets the dataclass of the current window
+Dataclass = gm.get_current_config() # Gets the dataclass of the current window
 
 Dataclass.size = (900, 700) # Example of editing the config
-gamermaker.close_window() # Closes the current window
-gamermaker.create_from_config(Dataclass) # Opens the modified window
+gm.end()
+gm.create_from_config(Dataclass) # Opens the modified window
 ```
