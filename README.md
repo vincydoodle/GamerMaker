@@ -1,6 +1,6 @@
 # Description
 
-GamerMaker is simple library that helps make games using [Pygame](https://www.pygame.org/). You can use it for your own games, or just look at the code. It is meant to be a library to simplify the job of using pygame, especially for learning. Please recommend new features [here](https://)
+GamerMaker is simple library that helps make games using [Pygame](https://www.pygame.org/). You can use it for your own games, or just look at the code. It is meant to be a library to simplify the job of using pygame, especially for learning. If you find any problems, report them [here](https://github.com/vincydoodle/GamerMaker/issues)
 
 #### How to install
 Run the following command:
