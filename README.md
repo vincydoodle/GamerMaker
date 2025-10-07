@@ -5,7 +5,7 @@ GamerMaker is simple library that helps make games using [Pygame](https://www.py
 ### How to install
 Simply run the following command:
 ```commandline
-py -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ gamermaker, pygame, colorama
+py -m pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ gamermaker pygame colorama
 ```
 
 ### Links
