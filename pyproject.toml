@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling >= 1.26", "pygame >= 2.6.0", "colorama >= 0.4"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gamermaker"
+version = "0.1.0"
+authors = [
+  { name="Vincent Bradford", email="vincent.l.bradford@gmail.com" },
+]
+description = "A small game making library that uses pygame"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENCSE"]
