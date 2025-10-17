@@ -1,6 +1,5 @@
 from src.gamermaker.game import *
-from pygame.key import *
-from pygame.constants import *
+from pygame import *
 
 # Adds Keybinds
 def add_keybinding(key: int, action: callable):

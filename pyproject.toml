@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "gamermaker"
-version = "0.1.2"
+version = "0.1.3"
 authors = [
   { name="Vincent Bradford", email="vincent.l.bradford@gmail.com" },
 ]

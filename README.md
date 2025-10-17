@@ -1,4 +1,5 @@
-# Description
+# GamerMaker
+## Description
 
 GamerMaker is simple library that helps make games using [Pygame](https://www.pygame.org/). You can use it for your own games, or just look at the code. It is meant to be a library to simplify the job of using pygame, especially for learning. If you find any problems, report them [here](https://github.com/vincydoodle/GamerMaker/issues)
 
@@ -13,7 +14,8 @@ pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://
 
 [PyPI Test](https://test.pypi.org/project/gamermaker/)
 
-# How to use GamerMaker
+___
+## Windows
 ### Making a Window
 
 In order to make a game in Pygame, you would probably have a setup like this:
@@ -41,25 +43,6 @@ def draw():
     # Draw Code
 
 gm.game.create((800, 600), "Game Window", gm.image.load("PATH/TO/ICON.png"), on_update = update, on_draw = draw)
-```
-
-### Keybinds
-In Pygame, if you want to add a keybind you add it directly to the gameloop. In GamerMaker however, the gameloop is done internally. To add a keybind you can:
-1. Add your own code to your update function: 
-```python
-def update():
-    for event in gm.event.get():
-        if event.type == gm.KEYDOWN:
-            if event.key == gm.K_SPACE:
-                print("Space Was Pressed")
-```
-
-2. Use GamerMaker's built in function:
-```python
-gm.keys.add_keybinding(gm.K_SPACE, lambda: print("Space Was Pressed"))
-
-# You can also remove them
-gm.keys.remove_keybinding(gm.K_SPACE)
 ```
 
 ### Window Handling
@@ -105,3 +88,32 @@ Dataclass.size = (900, 700) # Example of editing the config
 gm.end()
 gm.create_from_config(Dataclass) # Opens the modified window
 ```
+
+## Simple actions
+### Keybinding
+In Pygame, if you want to add a keybind you add it directly to the gameloop. In GamerMaker however, the gameloop is done internally. To get around this, you could add it to the provided update function:
+```python
+def update():
+    for event in gm.event.get():
+        if event.type == gm.KEYDOWN:
+            if event.key == gm.K_SPACE:
+                print("Space Was Pressed")
+```
+
+2. However, this can get very large. That's why there is a function for that:
+```python
+gm.keys.add_keybinding(gm.K_SPACE, lambda: print("Space Was Pressed"))
+
+# You can also remove them
+gm.keys.remove_keybinding(gm.K_SPACE)
+```
+
+###### More coming soon!
+
+<!--
+## Sprites
+### Normal Sprites
+### Sprites With Gravity
+### Rigid Bodies
+### Soft Bodies
+-->
