@@ -53,9 +53,9 @@ gm.game.reopen_window() # Closes and then reopens the window
 
 gm.game.end() # Closes the window
 
-gm.edit_name("Hello, World") # Changes the current window title to the given one
+gm.game.edit_name("Hello, World") # Changes the current window title to the given one
 
-gm.edit_icon(gm.image.load("PATH/TO/NEW/ICON.png")) # Changes the current window icon to the given one
+gm.game.edit_icon(gm.image.load("PATH/TO/NEW/ICON.png")) # Changes the current window icon to the given one
 ```
 
 ### Window Dataclasses
@@ -85,8 +85,8 @@ In GamerMaker, there is a function for getting and manually changing the datacla
 Dataclass = gm.get_current_config() # Gets the dataclass of the current window
 
 Dataclass.size = (900, 700) # Example of editing the config
-gm.end()
-gm.create_from_config(Dataclass) # Opens the modified window
+gm.game.end()
+gm.game.create_from_config(Dataclass) # Opens the modified window
 ```
 
 ## Simple actions
