@@ -108,7 +108,7 @@ gm.keys.add_keybinding(gm.K_SPACE, lambda: print("Space Was Pressed"))
 gm.keys.remove_keybinding(gm.K_SPACE)
 ```
 
-###### More coming soon!
+##### More coming soon!
 
 <!--
 ## Sprites
